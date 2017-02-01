@@ -3,6 +3,8 @@ var volleyball = require('volleyball');
 var bodyParser = require('body-parser');
 var swig = require('swig');
 var path = require('path');
+var attractionRoutes = require('./routes/api/attractions');
+var dayRoutes = require('./routes/api/days');
 
 var db = require('./models');
 
@@ -28,6 +30,10 @@ app.use(express.static(path.join(__dirname, '/public')));
 // serve dynamic routes
 app.use(require('./routes'));
 
+app.use('/api', attractionRoutes);
+
+app.use('/api/days', dayRoutes);
+
 // failed to catch req above means 404, forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
@@ -50,7 +56,7 @@ app.listen(port, function () {
   console.log('The server is listening closely on port', port);
   db.sync()
   .then(function () {
-    console.log('Synchronated the database');
+    console.log('Synchronized the database');
   })
   .catch(function (err) {
     console.error('Trouble right here in River City', err, err.stack);

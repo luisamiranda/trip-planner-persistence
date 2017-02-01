@@ -8,7 +8,7 @@
  * that attraction's id. Selecting an option looks up the attraction by id,
  * then tells the trip module to add the attraction.
  */
- 
+
 $(function () {
 
     // jQuery selects
@@ -20,11 +20,30 @@ $(function () {
   // ~~~~~~~~~~~~~~~~~~~~~~~
     // This looks like a great place to start AJAX work with a request for all attractions. Don't forget that these kinds of requests are async, so we won't have all of the attractions until it comes back, but once it comes back we can make the option tags
   // ~~~~~~~~~~~~~~~~~~~~~~~
+  $.get('/api/hotels')
+   .then(function (hotels) {
+    hotels.forEach(makeOption, $hotelSelect);
+  })
+   .catch( console.error.bind(console) );
+
+  $.get('/api/restaurants')
+   .then(function (restaurants) {
+    restaurants.forEach(makeOption, $restaurantSelect);
+  })
+   .catch( console.error.bind(console) );
+
+
+  $.get('/api/activities')
+   .then(function (activities) {
+    activities.forEach(makeOption, $activitySelect);
+  })
+   .catch( console.error.bind(console) );
+
 
     // make all the option tags (second arg of `forEach` is a `this` binding)
-    hotels.forEach(makeOption, $hotelSelect);
-    restaurants.forEach(makeOption, $restaurantSelect);
-    activities.forEach(makeOption, $activitySelect);
+    // hotels.forEach(makeOption, $hotelSelect);
+    // restaurants.forEach(makeOption, $restaurantSelect);
+    // activities.forEach(makeOption, $activitySelect);
 
     // Once you've made AJAX calls to retrieve this information,
     // call attractions.loadEnhancedAttractions in the fashion
