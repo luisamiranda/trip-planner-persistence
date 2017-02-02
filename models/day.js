@@ -8,11 +8,15 @@ var Activity = require('./activity');
 
 var Day = db.define('day', {
   number: {
-    type: Sequelize.INTEGER,
-    autoincrement: true,
-    primaryKey: true
+    type: Sequelize.INTEGER
   }
-}, {},{});
+}, {
+  hooks: {
+    beforeValidate: {
+      
+    }
+  }
+});
 
 
 Day.belongsTo(Hotel);

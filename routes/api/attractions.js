@@ -14,17 +14,6 @@ router.get('/hotels', function(req, res, next){
   .catch(next);
 });
 
-// $.get('/api/hotels', {
-//   hotels: Hotel.findAll()
-// }, function(hotels){
-//      hotels.forEach(function(hotel){
-//      console.log(hotel.name);
-//   })
-//   .catch(function(err){
-//     console.error(err.stack);
-//   })
-// })
-
 
 router.get('/restaurants', function(req, res, next){
   Restaurant.findAll()
